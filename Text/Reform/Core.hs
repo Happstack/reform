@@ -5,11 +5,11 @@ This module defines the 'Form' type, its instances, core manipulation functions,
 module Text.Reform.Core where
 
 import Control.Applicative         (Applicative(pure, (<*>)))
-import Control.Applicative.Indexed (IndexedApplicative(ipure, (<<*>>)), IndexedFunctor (imap))
 import Control.Arrow               (first, second)
 import Control.Monad.Reader        (MonadReader(ask), ReaderT, runReaderT)
 import Control.Monad.State         (MonadState(get,put), StateT, evalStateT)
 import Control.Monad.Trans         (lift)
+import Data.Biapplicative          (Biapplicative(bipure, (<<*>>)), Bifunctor(bimap))
 import Data.Monoid                 (Monoid(mempty, mappend))
 import Data.Text.Lazy              (Text, unpack)
 import Text.Reform.Result          (FormId(..), FormRange(..), Result(..), unitRange, zeroId)
@@ -155,17 +155,17 @@ instance Functor (View e) where
 -- @digestive-functors <= 0.2@.
 newtype Form m input error view proof a = Form { unForm :: FormState m input (View error view, m (Result error (Proved proof a))) }
 
-instance (Monad m) => IndexedFunctor (Form m input view error) where
-    imap f g (Form frm) =
+instance (Monad m) => Bifunctor (Form m input view error) where
+    bimap f g (Form frm) =
         Form $ do (view, mval) <- frm
                   val <- lift $ lift $ mval
                   case val of
                     (Ok (Proved p pos a)) -> return (view, return $ Ok (Proved (f p) pos (g a)))
                     (Error errs)          -> return (view, return $ Error errs)
 
-instance (Monoid view, Monad m) => IndexedApplicative (Form m input error view) where
-    ipure p a = Form $ do i <- getFormId
-                          return (mempty, return $ Ok (Proved p (unitRange i) a))
+instance (Monoid view, Monad m) => Biapplicative (Form m input error view) where
+    bipure p a = Form $ do i <- getFormId
+                           return (mempty, return $ Ok (Proved p (unitRange i) a))
 
     (Form frmF) <<*>> (Form frmA) =
         Form $ do ((view1, mfok), (view2, maok)) <- bracketState $
