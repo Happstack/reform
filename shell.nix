@@ -4,12 +4,15 @@ let
 
   inherit (nixpkgs) pkgs;
 
-  f = { mkDerivation, base, containers, mtl, stdenv, text, bifunctors, cabal-install }:
+  f = { mkDerivation, base, bifunctors, containers, hspec, mtl
+      , QuickCheck, stdenv, text, cabal-install, checkers, derive
+      }:
       mkDerivation {
         pname = "reform";
         version = "0.2.7.1";
         src = ./.;
-        libraryHaskellDepends = [ base containers mtl text bifunctors cabal-install ];
+        libraryHaskellDepends = [ base bifunctors containers mtl text cabal-install ];
+        testHaskellDepends = [ base hspec QuickCheck checkers derive ];
         homepage = "http://www.happstack.com/";
         description = "reform is a type-safe HTML form generation and validation library";
         license = stdenv.lib.licenses.bsd3;
