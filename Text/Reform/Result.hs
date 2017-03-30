@@ -28,11 +28,21 @@ data Result e ok
 instance Functor (Result e) where
     fmap _ (Error x) = Error x
     fmap f (Ok x)    = Ok (f x)
+{-
+
+This instance may seem useful -- but it is not consistent with the
+Applicative instance, so it is not permitable.
+
+We could modify the Applicative instance so that it did not accumulate
+errors. That would allow this Monad instance. But only being able to
+report one validation error when multiple fields might be invalid
+seems like a big price to pay.
 
 instance Monad (Result e) where
     return = Ok
     Error x >>= _ = Error x
     Ok x    >>= f = f x
+-}
 
 instance Applicative (Result e) where
     pure = Ok
