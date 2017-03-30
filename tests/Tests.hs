@@ -3,7 +3,7 @@
 module Main where
 
 import           Control.Monad
-import           Data.DeriveTH
+-- import           Data.DeriveTH
 import           Test.Hspec
 import           Test.Hspec.QuickCheck           (prop)
 import           Test.QuickCheck hiding (Result)
