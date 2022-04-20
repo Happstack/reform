@@ -13,7 +13,7 @@ Copyright:           2012 Jeremy Shaw, Jasper Van der Jeugt, SeeReason Partners 
 Category:            Web
 Build-type:          Simple
 Homepage:            http://www.happstack.com/
-Cabal-version:       >=1.6
+Cabal-version:       >=1.10
 tested-with:         GHC == 7.6.3, GHC == 7.8.4, GHC == 7.10.3, GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.4, GHC == 8.10.7, GHC == 9.0.2, GHC == 9.2.2
 
 source-repository head
@@ -21,6 +21,7 @@ source-repository head
     location: https://github.com/Happstack/reform.git
 
 Library
+  Default-Language:    Haskell2010
   Exposed-modules:     Control.Applicative.Indexed
                        Text.Reform
                        Text.Reform.Backend
