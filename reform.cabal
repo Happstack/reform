@@ -1,5 +1,5 @@
 Name:                reform
-Version:             0.2.7.5
+Version:             0.2.7.6
 Synopsis:            reform is a type-safe HTML form generation and validation library
 Description:         reform follows in the footsteps of formlets and
                      digestive-functors <= 0.2. It provides a
@@ -14,7 +14,7 @@ Category:            Web
 Build-type:          Simple
 Homepage:            http://www.happstack.com/
 Cabal-version:       >=1.10
-tested-with:         GHC == 7.6.3, GHC == 7.8.4, GHC == 7.10.3, GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.4, GHC == 8.10.7, GHC == 9.0.2, GHC == 9.2.2
+tested-with:         GHC == 7.6.3, GHC == 7.8.4, GHC == 7.10.3, GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.4, GHC == 8.10.7, GHC == 9.0.2, GHC == 9.2.2, GHC == 9.4.8, GHC == 9.6.4, GHC == 9.8.2
 
 source-repository head
     type:     git
@@ -30,8 +30,8 @@ Library
                        Text.Reform.Proof
                        Text.Reform.Result
   Build-depends:       base             >= 4    && < 5,
-                       containers       >= 0.4  && < 0.7,
-                       mtl              >= 2.0  && < 2.3,
+                       containers       >= 0.4  && < 0.9,
+                       mtl              >= 2.0  && < 2.4,
                        semigroups       >= 0.16 && < 0.21,
-                       text             >= 0.11 && < 2.1
+                       text             >= 0.11 && < 2.2
 
