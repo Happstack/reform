@@ -41,6 +41,7 @@ input fromInput toView initialValue =
                     return ( View $ const $ toView i initialValue
                            , return $ Error [(unitRange i, error)]
                            )
+                (Found fromInput) -> error "input: How could this even happen?"
                 Missing ->
                     return ( View $ const $ toView i initialValue
                            , return $ Error [(unitRange i, commonFormError (InputMissing i))]
@@ -306,6 +307,7 @@ inputChoiceForms def choices mkView =
 
       selectFirst :: [(Form m input error view proof a, lbl)] -> [(Form m input error view proof a, lbl, Bool)]
       selectFirst ((frm, lbl):fs) = (frm,lbl,True) : map (\(frm',lbl') -> (frm', lbl', False)) fs
+      selectFirst [] = []
 
       markSelected :: Int -> [(Int, (Form m input error view proof a, lbl))] -> [(Form m input error view proof a, lbl, Bool)]
       markSelected n choices =

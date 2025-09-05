@@ -98,6 +98,7 @@ instance (SG.Semigroup input, Monad m) => SG.Semigroup (Environment m input) whe
                  (Found x, Found y) -> return $ Found (x SG.<> y)
                  (Found x, _      ) -> return $ Found x
                  (_      , Found y) -> return $ Found y
+                 (Default, Default) -> return Default
 
 -- | Not quite sure when this is useful and so hard to say if the rules for combining things with Missing/Default are correct
 instance (SG.Semigroup input, Monad m) => Monoid (Environment m input) where
