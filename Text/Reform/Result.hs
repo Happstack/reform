@@ -31,7 +31,6 @@ instance Functor (Result e) where
     fmap f (Ok x)    = Ok (f x)
 
 instance Monad (Result e) where
-    return = Ok
     Error x >>= _ = Error x
     Ok x    >>= f = f x
 
