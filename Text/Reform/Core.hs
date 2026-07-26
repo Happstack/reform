@@ -103,7 +103,6 @@ instance (SG.Semigroup input, Monad m) => SG.Semigroup (Environment m input) whe
 -- | Not quite sure when this is useful and so hard to say if the rules for combining things with Missing/Default are correct
 instance (SG.Semigroup input, Monad m) => Monoid (Environment m input) where
     mempty = NoEnvironment
-    mappend = (SG.<>)
 
 -- | Utility function: returns the current 'FormId'. This will only make sense
 -- if the form is not composed
